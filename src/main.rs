@@ -1,33 +1,11 @@
-use rand::Rng;
-use std::cmp::Ordering;
-use std::io;
-
 fn main() {
-    let secret_number = rand::thread_rng().gen_range(1..100);
-    println!("The secret number is: {secret_number}");
-    loop {
-        println!("Guess the number!");
-        println!("Please input your guess.");
+    let s1 = String::from("Hello");
+    let (s2, len) = calculate_length(s1);
 
-        let mut guess = String::new();
+    println!("The length of '{}' is {}.", s2, len);
+}
 
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Failed to read line");
-
-        let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => continue,
-        };
-        println!("You guessed: {guess}");
-
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("Too small"),
-            Ordering::Greater => println!("Too big"),
-            Ordering::Equal => {
-                println!("YOU WIN");
-                break;
-            }
-        }
-    }
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len();
+    (s, length)
 }
